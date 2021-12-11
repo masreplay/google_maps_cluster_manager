@@ -3,9 +3,10 @@ import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platf
 
 class Cluster<T extends ClusterItem> {
   final LatLng location;
+  final int zoomLevel;
   final Iterable<T> items;
 
-  Cluster(this.items)
+  Cluster(this.items,this.zoomLevel)
       : this.location = LatLng(
             items.fold<double>(0.0, (p, c) => p + c.location.latitude) /
                 items.length,

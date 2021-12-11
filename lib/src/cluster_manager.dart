@@ -101,7 +101,7 @@ class ClusterManager<T extends ClusterItem> {
     }).toList();
 
     if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
-      return visibleItems.map((i) => Cluster<T>([i])).toList();
+      return visibleItems.map((i) => Cluster<T>([i],_zoom.toInt())).toList();
 
     int level = _findLevel(levels);
     List<Cluster<T>> markers = _computeClusters(
@@ -157,7 +157,7 @@ class ClusterManager<T extends ClusterItem> {
         .where((p) => p.geohash.substring(0, level) == nextGeohash)
         .toList();
 
-    markerItems.add(Cluster<T>(items));
+    markerItems.add(Cluster<T>(items, level));
 
     List<T> newInputList = List.from(
         inputItems.where((i) => i.geohash.substring(0, level) != nextGeohash));
